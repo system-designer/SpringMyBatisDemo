@@ -1,0 +1,32 @@
+body{
+	font-family: 微软雅黑;
+}
+.colorBox{
+	border:1px solid #eeeeee;
+	width:16px;
+	height:16px;
+	display: inline-block;
+}
+/* datatable */
+.ui-datatable-pager{
+	margin:0px;
+}
+.sorticon{
+	font-size:8px;
+	color: #aaa;
+}
+.sortable{
+	cursor: pointer;
+}
+.sorticon{
+	display:none;
+}
+.sortable .sorticon.desc{
+	display: none;
+}
+.sorting .sorticon.asc, .sorting.desc .sorticon.desc{
+	display: inline-block;
+}
+.sorting.desc .sorticon.asc{
+	display:none;
+}

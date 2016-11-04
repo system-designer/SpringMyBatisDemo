@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  <definition name="console" template="/WEB-INF/layout/console/layout.jsp">
+      <put-attribute name="title" value="pokeman"/>
+    <put-attribute name="header" value="/WEB-INF/layout/console/header.jsp" />
+  </definition>
+</tiles-definitions>

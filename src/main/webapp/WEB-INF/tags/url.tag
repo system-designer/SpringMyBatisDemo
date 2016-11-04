@@ -1,0 +1,1 @@
+<%@ attribute name="src" required="true"%><%= request.getContextPath() %>/${src}

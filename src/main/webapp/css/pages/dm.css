@@ -1,0 +1,247 @@
+#detailDialog .modal-body {
+	height: -moz-calc(100% - 37px);
+	height: -webkit-calc(100% - 37px);
+	height: calc(100% - 37px);
+	padding: 0px;
+}
+
+#detailDialog .modal-header {
+	border-bottom: 0px;
+}
+
+#container {
+	width: 80%;
+	height: 100%;
+	float: left;
+}
+
+#tabs {
+	height: 100%;
+	width: 20%;
+	float: left;
+}
+
+#tabs label {
+	width: 30%;
+	display: inline-block;
+}
+
+#tabs input[type="text"] {
+	width: 65%;
+	display: inline-block;
+}
+
+#detailDialog .tabs-below>.nav-tabs {
+	border-top: 0px;
+}
+
+#detailDialog .nav>li>a {
+	padding: 10px;
+}
+
+#detailDialog .panel, .panel-group .panel-heading+.panel-collapse>.panel-body
+	{
+	border: 0px;
+}
+
+#detailDialog .panel-group {
+	margin-bottom: 0px;
+}
+
+#detailDialog .panel-body {
+	padding: 5px 0px;
+}
+
+#detailDialog .BMap_bubble_content label {
+	display: inline-block;
+	width: 80px;
+}
+
+#detailDialog .BMap_bubble_content input {
+	width: auto;
+	margin-bottom: 4px;
+}
+
+#detailDialog .BMap_bubble_title a {
+	display: none;
+}
+
+#detailDialog .BMap_shadow img {
+	max-width: none;
+}
+
+#stopTable .dropdown-menu {
+	min-width: 70px;
+	width: 70px;
+	border-radius: 0;
+	padding: 5px 0px;
+	border-radius: 0 0 4px 4px;
+	border-top: 0;
+	background: #5fc6e4;
+	text-align: center;
+	left: -40px;
+}
+
+#stopTable .btn-group .btn.btn-info.default {
+	width: 45px;
+}
+
+#stopTable .dropdown-menu a {
+	color: #fff;
+}
+
+#detailDialog #more .btn {
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	line-height: 50px;
+}
+
+#detailDialog hr {
+	margin: 10px 0;
+}
+
+#detailDialog .selecthover {
+	color: #ffffff;
+	text-decoration: none;
+	background-color: #0081c2;
+	background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc),
+		to(#0077b3));
+	background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+	background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+	background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc',
+		endColorstr='#ff0077b3', GradientType=0);
+}
+
+#detailDialog .table th, #detailDialog .table td {
+	text-align: center;
+	vertical-align: middle;
+	padding: 4px;
+}
+
+#detailDialog #a-result td {
+	text-align: left;
+}
+
+#detailDialog .table .btn {
+	padding: 2px 8px;
+}
+
+#stopnameTable .table td {
+	text-align: left;
+}
+
+#detailDialog table.table-striped {
+	margin-top: 0px;
+}
+
+#detailDialog .table {
+	margin-bottom: 5px;
+}
+
+#detailDialog img {
+	max-width: none;
+}
+
+#dm_navbar .dropdown-menu {
+	max-height: 300px;
+	overflow: auto;
+}
+
+#detailDialog .panel-title>a {
+	display: block;
+	width: 100%;
+}
+
+#lineInfo .percent50 {
+	float: left;
+	width: 50%;
+}
+
+#detailDialog {
+	padding-left: 0px !important;
+}
+
+#detailDialog .tabcontent {
+	padding: 5px;
+	height: -moz-calc(100% - 42px);
+	height: -webkit-calc(100% - 42px);
+	height: calc(100% - 42px);
+	overflow-y: auto;
+}
+
+.BMapLib_hander, .BMapLib_hander_hover, .BMapLib_marker, .BMapLib_circle,
+	.BMapLib_polyline, .BMapLib_polygon {
+	display: none;
+}
+
+.BMapLib_Drawing {
+	top: 10px !important;
+	right: 200px !important;
+}
+
+svg {
+	z-index: 1;
+}
+
+.autocomplete_label {
+	width: 25px;
+	display: inline-block;
+}
+
+#lineAccordion .select2-container {
+	margin-bottom: 0;
+}
+
+#lineInfo .form-group {
+	margin-bottom: 5px;
+}
+
+#price-div label {
+	width: 15%;
+}
+
+#price-div input[type=text] {
+	width: 80%;
+}
+
+.panel-heading {
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.trselected {
+	background-color: #E3DDFF;
+}
+
+/* #a-table tr td{
+                width:30px !important;
+            } */
+.imgArea ul li {
+	display: inline-block;
+	position: relative;
+	margin: 10px;
+	width: 120px;
+	height: 120px;
+	float: left;
+	list-style-type: none;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 3px 3px 8px #000;
+}
+
+.imgArea {
+	height: 300px;
+}
+
+.btn {
+	padding: 2px 9px;
+}
+
+.tip_table_w {
+	width: 20%;
+}

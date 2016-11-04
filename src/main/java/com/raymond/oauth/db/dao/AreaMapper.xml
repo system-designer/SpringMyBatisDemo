@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.raymond.oauth.db.dao.AreaMapper" >
+  <resultMap id="BaseResultMap" type="com.raymond.oauth.db.model.Area" >
+    <id column="id_" property="id" jdbcType="BIGINT" />
+    <result column="code_" property="code" jdbcType="VARCHAR" />
+    <result column="city_en_" property="cityEn" jdbcType="VARCHAR" />
+    <result column="city_cn_" property="cityCn" jdbcType="VARCHAR" />
+    <result column="parent_" property="parent" jdbcType="BIGINT" />
+    <result column="order_" property="order" jdbcType="INTEGER" />
+    <result column="type_" property="type" jdbcType="VARCHAR" />
+    <result column="area_code_" property="areaCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_, code_, city_en_, city_cn_, parent_, order_, type_, area_code_
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.raymond.oauth.db.model.AreaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_area
+    where id_ = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_area
+    where id_ = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.raymond.oauth.db.model.AreaExample" >
+    delete from sys_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.raymond.oauth.db.model.Area" >
+    insert into sys_area (id_, code_, city_en_, 
+      city_cn_, parent_, order_, 
+      type_, area_code_)
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{cityEn,jdbcType=VARCHAR}, 
+      #{cityCn,jdbcType=VARCHAR}, #{parent,jdbcType=BIGINT}, #{order,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.raymond.oauth.db.model.Area" >
+    insert into sys_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id_,
+      </if>
+      <if test="code != null" >
+        code_,
+      </if>
+      <if test="cityEn != null" >
+        city_en_,
+      </if>
+      <if test="cityCn != null" >
+        city_cn_,
+      </if>
+      <if test="parent != null" >
+        parent_,
+      </if>
+      <if test="order != null" >
+        order_,
+      </if>
+      <if test="type != null" >
+        type_,
+      </if>
+      <if test="areaCode != null" >
+        area_code_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cityEn != null" >
+        #{cityEn,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCn != null" >
+        #{cityCn,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null" >
+        #{parent,jdbcType=BIGINT},
+      </if>
+      <if test="order != null" >
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.raymond.oauth.db.model.AreaExample" resultType="java.lang.Integer" >
+    select count(*) from sys_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_area
+    <set >
+      <if test="record.id != null" >
+        id_ = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.code != null" >
+        code_ = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityEn != null" >
+        city_en_ = #{record.cityEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCn != null" >
+        city_cn_ = #{record.cityCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parent != null" >
+        parent_ = #{record.parent,jdbcType=BIGINT},
+      </if>
+      <if test="record.order != null" >
+        order_ = #{record.order,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type_ = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaCode != null" >
+        area_code_ = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_area
+    set id_ = #{record.id,jdbcType=BIGINT},
+      code_ = #{record.code,jdbcType=VARCHAR},
+      city_en_ = #{record.cityEn,jdbcType=VARCHAR},
+      city_cn_ = #{record.cityCn,jdbcType=VARCHAR},
+      parent_ = #{record.parent,jdbcType=BIGINT},
+      order_ = #{record.order,jdbcType=INTEGER},
+      type_ = #{record.type,jdbcType=VARCHAR},
+      area_code_ = #{record.areaCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.raymond.oauth.db.model.Area" >
+    update sys_area
+    <set >
+      <if test="code != null" >
+        code_ = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="cityEn != null" >
+        city_en_ = #{cityEn,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCn != null" >
+        city_cn_ = #{cityCn,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null" >
+        parent_ = #{parent,jdbcType=BIGINT},
+      </if>
+      <if test="order != null" >
+        order_ = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type_ = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        area_code_ = #{areaCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_ = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.raymond.oauth.db.model.Area" >
+    update sys_area
+    set code_ = #{code,jdbcType=VARCHAR},
+      city_en_ = #{cityEn,jdbcType=VARCHAR},
+      city_cn_ = #{cityCn,jdbcType=VARCHAR},
+      parent_ = #{parent,jdbcType=BIGINT},
+      order_ = #{order,jdbcType=INTEGER},
+      type_ = #{type,jdbcType=VARCHAR},
+      area_code_ = #{areaCode,jdbcType=VARCHAR}
+    where id_ = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

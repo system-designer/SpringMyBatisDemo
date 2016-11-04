@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:cache="http://www.springframework.org/schema/cache"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/cache
+    http://www.springframework.org/schema/cache/spring-cache.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<!-- 引入配置文件 -->
+	<bean id="propertyConfigurer"
+     class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	   	<property name="locations">
+	      <list>
+	         <value>classpath*:config-*.properties</value>
+	      </list>
+	   </property>
+	</bean>
+
+	<import resource="applicationContext-oauth.xml" />
+	<context:annotation-config />
+ 
+	<!-- 自动扫描chelaile包 ,将带有注解的类 纳入spring容器管理 -->
+	<context:component-scan base-package="com.raymond.oauth">
+		<context:include-filter type="regex"
+			expression=".impl" />
+		<context:include-filter type="regex"
+			expression=".security" />
+	</context:component-scan>
+	
+	<!-- 配置使Spring采用CGLIB代理 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!-- 日志 -->
+	<bean id="aspect" class="com.raymond.core.LogAspect" />
+
+	<bean class="com.raymond.oauth.security.LoadWhitelistListener">
+		<property name="loadIPListService" ref="loadIPListService"></property>
+	</bean>
+
+	<!-- Cache配置 -->
+	<cache:annotation-driven cache-manager="cacheManager" />
+	<bean id="ehCacheManagerFactory"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+		p:configLocation="classpath:ehcache.xml" />
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
+		p:cacheManager-ref="ehCacheManagerFactory" />
+</beans>

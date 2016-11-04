@@ -1,0 +1,182 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: #707070;
+}
+
+header {
+
+}
+
+article {
+
+}
+
+p {
+  line-height: 1.5em;
+}
+
+article p {
+  text-indent: 2em;
+}
+.no_indent p{
+  text-indent: 0px;
+}
+
+.page_header, .page_section {
+  padding: 10px;
+}
+
+.page_header h1 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.page_header p {
+  text-align: right;
+}
+
+.page_section dt {
+  background: #f6f6f6;
+  border-bottom: 1px solid #eaeaea;
+  border-top: 1px solid #eaeaea;
+  color: #c0c0c0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.page_section dd {
+  color: #707070;
+}
+
+.reset_list, .reset_list li, .reset_list dt, .reset_list dd {
+  list-style: none;
+  line-height: 20px;
+}
+
+.list_item {
+  border-bottom: 1px solid #ededed;
+  cursor: pointer;
+}
+
+.list_item > a {
+  display: block;
+  padding: 14px 16px 10px 28px;
+  font-size: 13px;
+  color: #8E8E93;
+}
+
+.list_item dt {
+  /*font-size: 1.2em;*/
+  /*font-weight: bold;*/
+  line-height: 24px;
+  font-size: 17px;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.list_item dd.time {
+  /*display: inline;*/
+  /*float: right;*/
+  /*color: #959595;*/
+}
+
+.page_title {
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 1.5em;
+  font-weight: bold;
+}
+
+img {
+  max-width: 100%;
+}
+
+.text_warning {
+  color: #ff0000;
+}
+
+.text_emphasize {
+  color: #ea68a2;
+}
+
+.text_desc {
+  color: #000000;
+}
+
+.article {
+  padding: 10px;
+}
+
+.article p {
+  line-height: 1.5em;
+  color: #626262;
+}
+
+.section_title {
+  line-height: 1.5em;
+  margin-top: 1.2em;
+}
+
+.contact {
+  padding: 10px;
+  border: 1px solid #e4e4e4;
+  border-width: 1px 0 1px 0;
+}
+
+.contact h3 {
+  margin: 10px 0;
+}
+
+.contact li {
+  line-height: 1.5em;
+}
+
+.copyright p {
+  text-align: center;
+  color: #9e9e9e;
+  line-height: 2em;
+}
+
+#root_page {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.single_center_row_container {
+  /* overriding app background style */
+  background-color: #FFFADD; 
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.single_center_row {
+  font-size: 15px;
+  color: #666;
+
+  display: block;
+  width: 100%;
+
+  padding-left: 16px;
+  padding-right: 16px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}

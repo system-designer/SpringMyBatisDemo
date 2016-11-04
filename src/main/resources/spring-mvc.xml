@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 资源文件 -->
+	<context:property-placeholder location="classpath*:config-*.properties" file-encoding="utf-8"/>
+    <!-- 扫描controller（controller层注入） -->
+    <context:component-scan base-package="com.raymond.**.controller"/>
+
+    <!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的 -->
+    <!-- 指定自己定义的validator -->
+   	<bean id="utf8Charset" class="java.nio.charset.Charset"
+          factory-method="forName">
+        <constructor-arg value="UTF-8"/>
+    </bean>
+    <mvc:annotation-driven validator="validator">
+    	 <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg ref="utf8Charset"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 以下 validator ConversionService 在使用 mvc:annotation-driven 会 自动注册 -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找 -->
+                <value>classpath:messages</value>
+                <value>classpath:org/hibernate/validator/ValidationMessages</value>
+            </list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+    </mvc:interceptors>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="zh_CN"/>
+    </bean>
+
+    <!-- 支持返回json(避免IE在ajax请求时，返回json出现下载 ) -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    
+       <mvc:interceptors>
+	    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	    <bean class="com.raymond.oauth.security.AccessLoggerInterceptor">
+	    	<property name="exclude">
+	    		<list>
+	    			<value>^/css/.*$</value>
+	    			<value>^/js/.*$</value>
+	    			<value>^/assets/.*$</value>
+	    			<value>^/font/.*$</value>
+	    			<value>^/images/.*$</value>
+	    			<value>^/theme/.*$</value>
+	    		</list>
+	    	</property>
+	    </bean>
+	    <mvc:interceptor>
+	    	<mvc:mapping path="/**"/>
+	        <bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
+	        	<property name="paramName" value="themeName"/>
+	        </bean>
+	    </mvc:interceptor>
+	</mvc:interceptors>   
+    
+    <!-- 支持返回json -->
+    <mvc:view-controller path="/" view-name="forward:/index" />
+    <mvc:resources mapping="/css/**" location="/css/" cache-period="2592000"/>
+	<mvc:resources mapping="/js/**" location="/js/" cache-period="2592000"/>
+	<mvc:resources mapping="/assets/**" location="/assets/" cache-period="2592000"/>
+	<mvc:resources mapping="/font/**" location="/font/" cache-period="2592000"/>
+	<mvc:resources mapping="/images/**" location="/images/" cache-period="2592000"/>
+	<mvc:resources mapping="/theme/**" location="/theme/" cache-period="2592000"/>
+
+    <!-- 对模型视图添加前后缀 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+
+    <!-- 配置springMVC处理上传文件的信息 -->
+     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="10485760000"/>
+        <property name="maxInMemorySize" value="40960"/>
+    </bean> 
+
+    <!-- 启用shrio授权注解拦截方式 -->
+    <aop:config proxy-target-class="true"></aop:config>
+  <!--   <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean> -->
+    <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+		<property name="basenamePrefix" value="theme." />
+    </bean>  
+    <bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver">
+		<property name="defaultThemeName" value="default"></property>
+		<!-- cookie 1年有效 365*24*60*60 -->
+		<property name="cookieMaxAge" value="#{365*24*60*60}"></property>
+	</bean>
+   <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+	  <property name="definitions" ref="scanLayout">
+	  <!--
+	    <list>
+	      <value>/WEB-INF/layout/default/tiles.xml</value>
+	      <value>/WEB-INF/layout/console/tiles.xml</value>
+	    </list>
+	  -->
+	  </property>
+	</bean>
+	<bean id="scanLayout" class="com.raymond.oauth.layout.ScanLayout"></bean>
+
+    <bean id="exceptionResolver" class="com.raymond.oauth.security.ExceptionHandlerExceptionResolver"/>
+</beans>
